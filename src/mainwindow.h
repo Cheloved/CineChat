@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <map>
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +18,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+    void RefreshWidgetList(QObject* parent);
+    std::map<QString, QObject*> widgetList;
 };
 
 #endif // MAINWINDOW_H
