@@ -25,13 +25,13 @@ void MainWindow::SetupWidgets()
     player->setMedia(QUrl::fromLocalFile("/home/penguin/Downloads/videoplayback"));
 
     // Add video widget to main window
-    dynamic_cast<QWidget*>(widgetList["mainFrame"])->setGeometry(-10, -10, width+20, height);
+    dynamic_cast<QWidget*>(widgetList["mainFrame"])->setGeometry(-10, -10, width+20, height-40);
     videoWidget->setGeometry(0,0,width,height-20);
     auto layout = new QVBoxLayout();
     layout->addWidget(videoWidget);
     dynamic_cast<QWidget*>(widgetList["mainFrame"])->setLayout(layout);
 
-    //player->play();
+    player->play();
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
@@ -39,7 +39,7 @@ void MainWindow::resizeEvent(QResizeEvent *event)
     this->width = this->geometry().width();
     this->height = this->geometry().height();
 
-    dynamic_cast<QWidget*>(widgetList["mainFrame"])->setGeometry(-10, -10, width+20, height);
+    dynamic_cast<QWidget*>(widgetList["mainFrame"])->setGeometry(-10, -10, width+20, height-40);
 }
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -54,12 +54,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     screenWidth = rect.width();
     screenHeight = rect.height();
 
-    width = 600;
-    height = 400;
+    width = 1000;
+    height = 600;
 
     this->setGeometry(screenWidth/2-width/2,screenHeight/2-height/2,width,height);
 
     this->SetupWidgets();
+    customSocket* s = new customSocket(customSocket::type::Client, "192.168.1.66", 80);
 }
 
 MainWindow::~MainWindow()

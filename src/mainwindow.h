@@ -1,8 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-
 #include "custominclude.h"
+#include "customsocket.h"
 
 namespace Ui {
 class MainWindow;
