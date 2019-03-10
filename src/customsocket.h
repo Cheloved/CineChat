@@ -6,6 +6,7 @@
 #include <QTcpSocket>
 #include <QTcpServer>
 #include <QTime>
+#include <QDebug>
 
 class customSocket : public QWidget
 {
@@ -22,11 +23,13 @@ private:
     QTcpSocket* socket;
     quint16 nextBlockSize;
 
+    QString data = "";
+
 private slots:
     void slotReadyRead   (                            );
-    /*void slotError       (QAbstractSocket::SocketError);
-    void slotSendToServer(                            );
-    void slotConnected   (                            );*/
+    void slotError       (QAbstractSocket::SocketError);
+    void slotSendToServer(        QString data        );
+    void slotConnected   (                            );
 };
 
 #endif // CUSTOMSOCKET_H
