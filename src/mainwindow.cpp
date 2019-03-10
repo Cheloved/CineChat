@@ -26,6 +26,7 @@ void MainWindow::SetupWidgets()
 
     // Add video widget to main window
     dynamic_cast<QWidget*>(widgetList["mainFrame"])->setGeometry(0, 0, width, height-20);
+    videoWidget->setGeometry(0,0,width,height-20);
     auto layout = new QVBoxLayout();
     layout->addWidget(videoWidget);
     dynamic_cast<QWidget*>(widgetList["mainFrame"])->setLayout(layout);
@@ -39,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 {
     ui->setupUi(this);
     RefreshWidgetList(this);
+    this->setWindowTitle("CineChat");
 
     QScreen* screen = QGuiApplication::primaryScreen();
     QRect rect = screen->geometry();
@@ -56,5 +58,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 MainWindow::~MainWindow()
 {
+    delete player;
+    delete videoWidget;
     delete ui;
 }

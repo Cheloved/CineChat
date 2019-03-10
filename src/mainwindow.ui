@@ -24,10 +24,13 @@
      </rect>
     </property>
     <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
+     <enum>QFrame::NoFrame</enum>
     </property>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
+    </property>
+    <property name="lineWidth">
+     <number>0</number>
     </property>
    </widget>
   </widget>
@@ -42,14 +45,38 @@
    </property>
    <widget class="QMenu" name="menuCinechat">
     <property name="title">
-     <string>Cinechat</string>
+     <string>File</string>
     </property>
+    <addaction name="actionLoad"/>
+   </widget>
+   <widget class="QMenu" name="menuNetwork">
+    <property name="title">
+     <string>Network</string>
+    </property>
+    <addaction name="actionConnect_to"/>
+    <addaction name="actionBecome_host"/>
    </widget>
    <addaction name="menuCinechat"/>
+   <addaction name="menuNetwork"/>
   </widget>
   <action name="actiont">
    <property name="text">
     <string>t</string>
+   </property>
+  </action>
+  <action name="actionLoad">
+   <property name="text">
+    <string>Load</string>
+   </property>
+  </action>
+  <action name="actionConnect_to">
+   <property name="text">
+    <string>Connect to ...</string>
+   </property>
+  </action>
+  <action name="actionBecome_host">
+   <property name="text">
+    <string>Become host</string>
    </property>
   </action>
  </widget>
