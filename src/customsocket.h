@@ -12,7 +12,7 @@ public:
     type workMode;
 
     explicit customSocket(type socketType, const QString& host, quint16 port, QWidget* parent = nullptr);
-    //~customSocket();
+    ~customSocket();
 
 private:
     QTcpSocket* socket;

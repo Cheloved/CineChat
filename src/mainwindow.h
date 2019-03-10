@@ -15,10 +15,13 @@ class MainWindow : public QMainWindow
 public:
 
     explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() override;
 
     void RefreshWidgetList(QObject* parent = nullptr);
     void SetupWidgets();
+
+protected:
+    void resizeEvent(QResizeEvent *event) override;
 
 private:
     Ui::MainWindow *ui;

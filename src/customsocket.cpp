@@ -1,6 +1,5 @@
 #include "customsocket.h"
 
-//customSocket::~customSocket(){}
 
 customSocket::customSocket(type socketType, const QString& host,
                            quint16 port, QWidget* parent) : QWidget (parent), nextBlockSize(0)
@@ -12,13 +11,16 @@ customSocket::customSocket(type socketType, const QString& host,
     // Make connection between socket signals and this->slots
     connect(socket, SIGNAL(readyRead()), SLOT(slotReadyRead()));
 
-    /*connect(socket, SIGNAL(connected()), SLOT(slotConnected()));
+    connect(socket, SIGNAL(connected()), SLOT(slotConnected()));
     connect(socket, SIGNAL(error(QAbstractSocket::SocketError)),
-            this,   SLOT(slotError(QAbstractSocket::SocketError)));*/
+            this,   SLOT(slotError(QAbstractSocket::SocketError)));
 
     // Apply work mode
     this->workMode = socketType;
 }
+
+customSocket::~customSocket()
+{ delete socket; }
 
 void customSocket::slotReadyRead()
 {

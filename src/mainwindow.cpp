@@ -25,15 +25,21 @@ void MainWindow::SetupWidgets()
     player->setMedia(QUrl::fromLocalFile("/home/penguin/Downloads/videoplayback"));
 
     // Add video widget to main window
-    dynamic_cast<QWidget*>(widgetList["mainFrame"])->setGeometry(0, 0, width, height-20);
+    dynamic_cast<QWidget*>(widgetList["mainFrame"])->setGeometry(-10, -10, width+20, height);
     videoWidget->setGeometry(0,0,width,height-20);
     auto layout = new QVBoxLayout();
     layout->addWidget(videoWidget);
     dynamic_cast<QWidget*>(widgetList["mainFrame"])->setLayout(layout);
 
+    //player->play();
+}
 
-    //videoWidget->show();
-    player->play();
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+    this->width = this->geometry().width();
+    this->height = this->geometry().height();
+
+    dynamic_cast<QWidget*>(widgetList["mainFrame"])->setGeometry(-10, -10, width+20, height);
 }
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
