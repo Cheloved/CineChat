@@ -13,14 +13,13 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);    
+    void RefreshWidgetList(QObject* parent = nullptr);
+    std::map<QString, QObject*> widgetList;
     ~MainWindow();
 
 private:
     Ui::MainWindow *ui;
-
-    void RefreshWidgetList(QObject* parent);
-    std::map<QString, QObject*> widgetList;
 };
 
 #endif // MAINWINDOW_H

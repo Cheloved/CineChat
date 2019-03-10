@@ -3,6 +3,8 @@
 
 void MainWindow::RefreshWidgetList(QObject* parent)
 {
+    if ( parent == nullptr )
+        parent = this;
     this->widgetList.insert( std::make_pair( parent->objectName(), parent ) );
     QList<QObject*> children = parent->children();
     for ( QObject* child : children )
