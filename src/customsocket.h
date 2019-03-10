@@ -1,12 +1,7 @@
 #ifndef CUSTOMSOCKET_H
 #define CUSTOMSOCKET_H
 
-#include <QObject>
-#include <QWidget>
-#include <QTcpSocket>
-#include <QTcpServer>
-#include <QTime>
-#include <QDebug>
+#include "custominclude.h"
 
 class customSocket : public QWidget
 {

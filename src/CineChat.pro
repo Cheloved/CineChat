@@ -31,7 +31,8 @@ SOURCES += \
 
 HEADERS += \
         mainwindow.h \
-    customsocket.h
+    customsocket.h \
+    custominclude.h
 
 FORMS += \
         mainwindow.ui
