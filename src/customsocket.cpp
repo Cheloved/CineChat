@@ -1,28 +1,42 @@
 #include "customsocket.h"
 
 
-customSocket::customSocket(type socketType, const QString& host,
-                           quint16 port, QWidget* parent) : QWidget (parent), nextBlockSize(0)
+/* Functions of Main socket class
+ * are discribed here
+*/
+
+customSocket::customSocket(type socketType, const QString& host, quint16 port, QWidget* parent)
 {
-    // Define socket and connect it
-    socket = new QTcpSocket(this);
+    // Apply work mode
+    this->workMode = socketType;
+
+    if ( socketType == ClientMode )
+        this->client = new Client(host, port, parent);
+}
+
+customSocket::~customSocket()
+{
+    delete client;
+    delete server;
+}
+
+// Client functions below
+Client::Client(const QString& host, quint16 port, QWidget* parent) : QWidget (parent), nextBlockSize(0)
+{
+    this->socket = new QTcpSocket();
     socket->connectToHost(host, port);
 
-    // Make connection between socket signals and this->slots
     connect(socket, SIGNAL(readyRead()), SLOT(slotReadyRead()));
 
     connect(socket, SIGNAL(connected()), SLOT(slotConnected()));
     connect(socket, SIGNAL(error(QAbstractSocket::SocketError)),
             this,   SLOT(slotError(QAbstractSocket::SocketError)));
-
-    // Apply work mode
-    this->workMode = socketType;
 }
 
-customSocket::~customSocket()
+Client::~Client()
 { delete socket; }
 
-void customSocket::slotReadyRead()
+void Client::slotReadyRead()
 {
     QDataStream in(socket);
     in.setVersion(QDataStream::Qt_4_2);
@@ -51,7 +65,7 @@ void customSocket::slotReadyRead()
     }
 }
 
-void customSocket::slotError(QAbstractSocket::SocketError err)
+void Client::slotError(QAbstractSocket::SocketError err)
 {
     QString strError =
     "Error: " + (err == QAbstractSocket::HostNotFoundError ?
@@ -65,7 +79,7 @@ void customSocket::slotError(QAbstractSocket::SocketError err)
      data.append(strError);
 }
 
-void customSocket::slotSendToServer(QString data)
+void Client::slotSendToServer(QString data)
 {
     QByteArray  arrBlock;
     QDataStream out(&arrBlock, QIODevice::WriteOnly);
@@ -78,7 +92,7 @@ void customSocket::slotSendToServer(QString data)
     socket->write(arrBlock);
 }
 
-void customSocket::slotConnected()
+void Client::slotConnected()
 {
     qDebug() << "Connection has been established";
 }

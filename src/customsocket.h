@@ -3,17 +3,13 @@
 
 #include "custominclude.h"
 
-class customSocket : public QWidget
+class Client : public QWidget
 {
 Q_OBJECT
-
 public:
-    enum type {Client, Server};
-    type workMode;
-
-    explicit customSocket(type socketType, const QString& host, quint16 port, QWidget* parent = nullptr);
-    ~customSocket();
-
+    explicit Client(const QString& host, quint16 port, QWidget* parent = nullptr);
+    void GetData();
+    ~Client();
 private:
     QTcpSocket* socket;
     quint16 nextBlockSize;
@@ -25,6 +21,35 @@ private slots:
     void slotError       (QAbstractSocket::SocketError);
     void slotSendToServer(        QString data        );
     void slotConnected   (                            );
+};
+
+class Server : public QWidget
+{
+Q_OBJECT
+public:
+    explicit Server();
+
+private:
+    QTcpServer* server;
+    quint16 nextBlockSize;
+    QString data = "";
+
+};
+
+class customSocket
+{
+
+public:
+    enum type {ClientMode, ServerMode};
+    type workMode;
+
+    explicit customSocket(type socketType, const QString& host, quint16 port, QWidget* parent = nullptr);
+    ~customSocket();
+
+private:
+    Client* client;
+    Server* server;
+    QWidget* pnt;
 };
 
 #endif // CUSTOMSOCKET_H

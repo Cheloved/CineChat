@@ -60,7 +60,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     this->setGeometry(screenWidth/2-width/2,screenHeight/2-height/2,width,height);
 
     this->SetupWidgets();
-    customSocket* s = new customSocket(customSocket::type::Client, "192.168.1.66", 80);
+    customSocket* s = new customSocket(customSocket::type::ClientMode, "192.168.1.66", 80);
 }
 
 MainWindow::~MainWindow()
