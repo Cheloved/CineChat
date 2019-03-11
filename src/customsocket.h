@@ -27,13 +27,18 @@ class Server : public QWidget
 {
 Q_OBJECT
 public:
-    explicit Server();
+    explicit Server(int port, QWidget* parent = nullptr);
+
+public slots:
+    virtual void slotNewConnection();
+    void slotReadClient();
 
 private:
     QTcpServer* server;
     quint16 nextBlockSize;
     QString data = "";
 
+    void sendToClient(QTcpSocket* pSocket, const QString& str);
 };
 
 class customSocket
